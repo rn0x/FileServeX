@@ -1,0 +1,35 @@
+{
+  "name": "fileservex",
+  "version": "1.0.0",
+  "description": "FileServeX is a Node.js application for serving files through an Express API, including support for different file types and dynamic file paths.",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "file",
+    "api",
+    "server",
+    "files",
+    "file-serving"
+  ],
+  "author": "Rayan Almalki (rn0x)",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "esm": "^3.2.25",
+    "express": "^4.19.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rn0x/fileservex"
+  },
+  "bugs": {
+    "url": "https://github.com/rn0x/fileservex/issues"
+  },
+  "homepage": "https://github.com/rn0x/fileservex#readme"
+}
