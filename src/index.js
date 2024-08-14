@@ -27,9 +27,27 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(root, 'index.html'));
 });
 
-// Catch-all route for undefined routes
+/**
+ * Catch-all route for undefined routes
+ * @param {express.Request} req - The request object
+ * @param {express.Response} res - The response object
+ */
 app.use((req, res) => {
-  res.status(404).json({ error: 'Route not found' });
+  const errorMessage = 'Route not found';
+  const statusCode = 404;
+  const requestUrl = req.originalUrl;
+  const method = req.method;
+
+  // Log the warning with detailed information
+  console.warn(`${errorMessage}: ${method} ${requestUrl}`);
+
+  // Respond with detailed JSON error information
+  res.status(statusCode).json({
+    status: statusCode,
+    error: errorMessage,
+    message: `The requested route '${requestUrl}' using method '${method}' does not exist.`,
+    timestamp: new Date().toISOString()
+  });
 });
 
 // Error handling middleware
