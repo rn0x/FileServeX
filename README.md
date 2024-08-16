@@ -2,18 +2,18 @@
 
 ![screencapture-home-i8x-net-2024-08-16-04_46_04](https://github.com/user-attachments/assets/5150ae22-6061-4bb5-aa60-6afba9f577f3)
 
-
 ## Description
 
-This project is a file server API built with Node.js and Express. The server allows users to retrieve files stored in the `files` directory through HTTP requests. The server supports dynamic module loading based on the environment variable `MODULE_TYPE`.
+This project is a file server API built with Node.js and Express. The server provides endpoints for serving files and their metadata from the `files` directory. It supports retrieving both the file content and file metadata in JSON format. The server dynamically loads either CommonJS or ES modules based on the environment variable `MODULE_TYPE`.
 
 ## Features
 
 - Serves files from the `files` directory.
+- Provides file metadata through `/api/files/*`.
 - Supports JSON and other file types.
 - Dynamically loads either CommonJS or ES modules based on environment configuration.
-- Error handling for undefined routes and internal server errors.
-- Automatic creation of the `files` directory if it doesn't exist.
+- Handles undefined routes and internal server errors gracefully.
+- Automatically creates the `files` directory if it doesn't exist.
 
 ## Directory Structure
 
@@ -22,10 +22,13 @@ This project is a file server API built with Node.js and Express. The server all
 ├── files/                   # Directory to store files, created automatically if missing
 ├── src/                     # Source files directory
 │   ├── routes/              # Express routes
-│   │   └── fileRoutes.js    # Route handling for file requests
+│   │   ├── fileMetadataRoutes.js  # Route for serving file metadata as JSON
+│   │   └── fileServeRoutes.js     # Route for serving files
 │   ├── utils/               # Utility functions
 │   │   └── fileUtils.js     # File utility functions for handling file retrieval
 │   └── index.js             # Main Express app file
+├── commonjs.js              # CommonJS module file (if MODULE_TYPE is 'commonjs')
+├── module.mjs              # ES Module file (if MODULE_TYPE is 'module')
 ├── server.js                # Entry point of the application, handles module loading
 └── README.md                # Project documentation
 ```
@@ -59,13 +62,21 @@ This project is a file server API built with Node.js and Express. The server all
 
 ## Usage
 
-- **Retrieve a file:**
+- **Retrieve File Metadata:**
 
   - Endpoint: `/api/files/*`
   - Method: `GET`
   - Example: `GET http://localhost:7000/api/files/example.json`
 
-  This endpoint retrieves files from the `files` directory. If the requested file has a `.json` extension, the server will return it as a JSON response. Otherwise, the file will be sent directly.
+  This endpoint retrieves metadata for files from the `files` directory. If the requested file exists, the server responds with JSON metadata, including size, modification date, and a URL for downloading the file.
+
+- **Retrieve a File:**
+
+  - Endpoint: `/files/*`
+  - Method: `GET`
+  - Example: `GET http://localhost:7000/files/example.json`
+
+  This endpoint serves the actual file content from the `files` directory. If the file has a `.json` extension, it will be returned as JSON. For other file types, the raw file content will be sent.
 
 - **Root Endpoint:**
 

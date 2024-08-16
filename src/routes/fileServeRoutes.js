@@ -14,8 +14,8 @@ import { getFile } from '../utils/fileUtils.js';
 const router = express.Router();
 
 /**
- * @route GET /api/files/*
- * @desc Get a file by filename and subdirectories
+ * @route GET /files/*
+ * @desc Serve a file or JSON file
  * @access Public
  */
 router.get('/*', getFile);
