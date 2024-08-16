@@ -1,5 +1,8 @@
 # FileServeX
 
+![screencapture-home-i8x-net-2024-08-16-04_46_04](https://github.com/user-attachments/assets/5150ae22-6061-4bb5-aa60-6afba9f577f3)
+
+
 ## Description
 
 This project is a file server API built with Node.js and Express. The server allows users to retrieve files stored in the `files` directory through HTTP requests. The server supports dynamic module loading based on the environment variable `MODULE_TYPE`.
