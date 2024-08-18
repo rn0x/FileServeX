@@ -10,6 +10,7 @@
 
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import path from 'path';
 import fileMetadataRoutes from './routes/fileMetadataRoutes.js';
 import fileServeRoutes from './routes/fileServeRoutes.js';
@@ -19,6 +20,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 7000;
 const root = path.resolve(process.cwd());
+
+app.use(cors());
 
 // Serve static files from the 'files' directory
 app.use('/files', fileServeRoutes);
